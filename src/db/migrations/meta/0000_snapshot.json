@@ -1,0 +1,152 @@
+{
+  "id": "d25ccc6d-b8a8-498c-9c91-218653164fe3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "hashtag": {
+      "name": "hashtag",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country_code": {
+          "name": "country_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "posts": {
+          "name": "posts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rank": {
+          "name": "rank",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latest_trending": {
+          "name": "latest_trending",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "views": {
+          "name": "views",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_promoted": {
+          "name": "is_promoted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trending_type": {
+          "name": "trending_type",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "hashtag_country_code_idx": {
+          "name": "hashtag_country_code_idx",
+          "columns": [
+            "country_code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "hashtag_trend": {
+      "name": "hashtag_trend",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "gen_random_uuid()"
+        },
+        "hashtag_id": {
+          "name": "hashtag_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "recorded_for_unix_time": {
+          "name": "recorded_for_unix_time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "interest": {
+          "name": "interest",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "hashtag_trend_hashtag_id_idx": {
+          "name": "hashtag_trend_hashtag_id_idx",
+          "columns": [
+            "hashtag_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "hashtag_trend_hashtag_id_hashtag_id_fk": {
+          "name": "hashtag_trend_hashtag_id_hashtag_id_fk",
+          "tableFrom": "hashtag_trend",
+          "tableTo": "hashtag",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "hashtag_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

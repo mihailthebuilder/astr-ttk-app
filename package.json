@@ -7,11 +7,21 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate": "drizzle-kit generate:pg",
+    "migrate": "tsx src/db/migrate.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "astro": "^4.1.1",
+    "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.29.3",
+    "postgres": "^3.4.3",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.8",
+    "drizzle-kit": "^0.20.10",
+    "tsx": "^4.7.0"
   }
 }
