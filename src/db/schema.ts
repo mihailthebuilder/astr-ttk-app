@@ -11,7 +11,7 @@ import {
 export const hashtag = pgTable(
   "hashtag",
   {
-    id: uuid("id").defaultRandom().primaryKey(),
+    id: uuid("id").defaultRandom().primaryKey().unique(),
     name: text("name"),
     countryCode: text("country_code"),
     posts: integer("posts"),

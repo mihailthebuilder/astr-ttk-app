@@ -1,5 +1,5 @@
 {
-  "id": "d25ccc6d-b8a8-498c-9c91-218653164fe3",
+  "id": "465d6d57-f79c-46a6-b2e8-904a58421988",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -11,8 +11,8 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "default": "gen_random_uuid()"
         },
         "name": {
@@ -81,7 +81,15 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "hashtag_id_unique": {
+          "name": "hashtag_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
     },
     "hashtag_trend": {
       "name": "hashtag_trend",
@@ -90,8 +98,8 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "default": "gen_random_uuid()"
         },
         "hashtag_id": {

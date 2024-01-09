@@ -8,8 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate": "drizzle-kit generate:pg",
-    "migrate": "tsx src/db/migrate.ts"
+    "migrate:make": "drizzle-kit generate:pg",
+    "migrate:push": "tsx src/db/migrate.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",

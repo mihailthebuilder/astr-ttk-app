@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "hashtag" (
-	"id" uuid DEFAULT gen_random_uuid(),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text,
 	"country_code" text,
 	"posts" integer,
@@ -8,11 +8,12 @@ CREATE TABLE IF NOT EXISTS "hashtag" (
 	"views" integer,
 	"is_promoted" boolean,
 	"trending_type" integer,
-	"created_at" timestamp
+	"created_at" timestamp,
+	CONSTRAINT "hashtag_id_unique" UNIQUE("id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "hashtag_trend" (
-	"id" uuid DEFAULT gen_random_uuid(),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"hashtag_id" uuid,
 	"recorded_for_unix_time" integer,
 	"interest" integer
