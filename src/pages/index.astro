@@ -1,10 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+
+import { hashtag } from "../db/schema";
+import { db } from "../db/client.ts";
+
+const hashtags = await db.select().from(hashtag);
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
+    {JSON.stringify(hashtags)}
+
     <svg
       class="astro-a"
       width="495"
