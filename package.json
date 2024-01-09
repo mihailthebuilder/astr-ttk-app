@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "migrate:make": "drizzle-kit generate:pg",
-    "migrate:push": "tsx src/db/migrate.ts"
+    "migrate:push": "tsx db/migrate.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
