@@ -8,8 +8,8 @@ export type Hashtag = {
   views: number;
   isPromoted: boolean;
   trendingType: number;
-  insertedAt: Date;
-  hashtag_trend: PointInHashtagTrend[];
+  createdAt: Date;
+  hashtagTrend: PointInHashtagTrend[];
 };
 
 export type PointInHashtagTrend = {
