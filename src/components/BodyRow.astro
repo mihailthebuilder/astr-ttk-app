@@ -1,5 +1,6 @@
 ---
 import BodyCell from "./BodyCell.astro";
+import TrendChart from "./TrendChart.tsx";
 
 import type { Hashtag } from "../lib/types";
 
@@ -54,7 +55,7 @@ function formatNumber(input: number): string {
   <BodyCell class="hidden md:table-cell">
     {postsViewsValue(hashtag)}
   </BodyCell>
-  <BodyCell class="max-w-36">
-    <!-- <TrendChart data={hashtag.hashtag_trend} /> -->
+  <BodyCell class="w-[150px] h-[70px]">
+    <TrendChart trend={hashtag.hashtagTrend} name={hashtag.name} client:load />
   </BodyCell>
 </tr>
