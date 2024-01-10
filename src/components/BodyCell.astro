@@ -2,7 +2,6 @@
 import { classNames } from "../lib/helpers";
 
 interface Props {
-  children?: string | any[];
   class?: string;
 }
 
@@ -15,5 +14,5 @@ const props = Astro.props;
     props.class
   )}
 >
-  {props.children}
+  <slot />
 </td>
