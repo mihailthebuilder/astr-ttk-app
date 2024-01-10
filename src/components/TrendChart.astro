@@ -1,0 +1,68 @@
+<!-- "use client";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+type Props = {
+  data: PointInHashtagTrend[];
+};
+
+export default function TrendChart(props: Props) {
+  const labels = props.data.map((trendPoint) =>
+    unixToFormattedDate(trendPoint.recorded_for_unix_time)
+  );
+
+  const values = props.data.map((trendPoint) => trendPoint.interest);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: values,
+        borderColor: "rgb(255, 99, 132)",
+      },
+    ],
+  };
+
+  return <Line data={data} options={options} />;
+}
+
+function unixToFormattedDate(input: number): string {
+  const date = new Date(input * 1000);
+  return date.getDate() + "/" + (date.getMonth() + 1);
+}
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    x: {
+      display: false,
+    },
+    y: {
+      display: false,
+    },
+  },
+}; -->

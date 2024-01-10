@@ -11,16 +11,16 @@ import {
 export const hashtag = pgTable(
   "hashtag",
   {
-    id: uuid("id").defaultRandom().primaryKey().unique(),
-    name: text("name"),
-    countryCode: text("country_code"),
-    posts: integer("posts"),
-    rank: integer("rank"),
-    latestTrending: boolean("latest_trending"),
-    views: integer("views"),
-    isPromoted: boolean("is_promoted"),
-    trendingType: integer("trending_type"),
-    createdAt: timestamp("created_at"),
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: text("name").notNull(),
+    countryCode: text("country_code").notNull(),
+    posts: integer("posts").notNull(),
+    rank: integer("rank").notNull(),
+    latestTrending: boolean("latest_trending").notNull(),
+    views: integer("views").notNull(),
+    isPromoted: boolean("is_promoted").notNull(),
+    trendingType: integer("trending_type").notNull(),
+    createdAt: timestamp("created_at").notNull(),
   },
   (table) => {
     return {
@@ -29,13 +29,15 @@ export const hashtag = pgTable(
   }
 );
 
-export const hasthagTrend = pgTable(
+export const hashtagTrend = pgTable(
   "hashtag_trend",
   {
     id: uuid("id").defaultRandom().primaryKey(),
-    hashtagId: uuid("hashtag_id").references(() => hashtag.id),
-    recordedForUnixTime: integer("recorded_for_unix_time"),
-    interest: integer("interest"),
+    hashtagId: uuid("hashtag_id")
+      .references(() => hashtag.id)
+      .notNull(),
+    recordedForUnixTime: integer("recorded_for_unix_time").notNull(),
+    interest: integer("interest").notNull(),
   },
   (table) => {
     return {

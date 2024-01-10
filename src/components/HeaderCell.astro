@@ -1,0 +1,19 @@
+---
+import { classNames } from "../lib/helpers.ts";
+
+interface Props {
+  children: string;
+  class?: string;
+}
+
+const props = Astro.props;
+---
+
+<th
+  class={classNames(
+    "px-6 bg-gray-100 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left",
+    props.class
+  )}
+>
+  {props.children}
+</th>

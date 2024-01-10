@@ -1,0 +1,48 @@
+---
+import HeaderCell from "./HeaderCell.astro";
+import BodyRow from "./BodyRow.astro";
+
+import type { Hashtag } from "../lib/types";
+
+interface Props {
+  hashtags: Hashtag[];
+}
+
+const { hashtags } = Astro.props;
+---
+
+<table class="shadow-xl rounded table-fixed w-full md:w-auto">
+  <thead>
+    <tr>
+      <HeaderCell>Hashtag</HeaderCell>
+      <HeaderCell class="hidden md:table-cell">Posts / Views</HeaderCell>
+      <HeaderCell>Popularity</HeaderCell>
+    </tr>
+  </thead>
+  <tbody class="bg-white">
+    {hashtags.map((hashtag) => <BodyRow hashtag={hashtag} />)}
+  </tbody>
+</table>
+
+<!-- 
+
+
+type BodyCellProps = {
+  children: string | JSX.Element | JSX.Element[];
+  className?: string;
+};
+
+function BodyCell(props: BodyCellProps) {
+  return (
+    <td
+      className={classNames(
+        "border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap py-2 text-left text-blueGray-700",
+        props.className
+      )}
+    >
+      {props.children}
+    </td>
+  );
+}
+
+ -->
