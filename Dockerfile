@@ -3,8 +3,8 @@ WORKDIR /app
 
 COPY . .
 
-ARG DATABASE_URL=${DATABASE_URL}
-ENV DB_URL=${DATABASE_URL}
+ARG DB_URL=${DB_URL}
+ENV DB_URL=${DB_URL}
 
 RUN npm install
 RUN npm run build
