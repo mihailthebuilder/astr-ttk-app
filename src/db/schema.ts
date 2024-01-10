@@ -20,7 +20,7 @@ export const hashtag = pgTable(
     views: integer("views").notNull(),
     isPromoted: boolean("is_promoted").notNull(),
     trendingType: integer("trending_type").notNull(),
-    createdAt: timestamp("created_at").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (table) => {
     return {

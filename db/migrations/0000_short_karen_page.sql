@@ -1,22 +1,21 @@
 CREATE TABLE IF NOT EXISTS "hashtag" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" text,
-	"country_code" text,
-	"posts" integer,
-	"rank" integer,
-	"latest_trending" boolean,
-	"views" integer,
-	"is_promoted" boolean,
-	"trending_type" integer,
-	"created_at" timestamp,
-	CONSTRAINT "hashtag_id_unique" UNIQUE("id")
+	"name" text NOT NULL,
+	"country_code" text NOT NULL,
+	"posts" integer NOT NULL,
+	"rank" integer NOT NULL,
+	"latest_trending" boolean NOT NULL,
+	"views" integer NOT NULL,
+	"is_promoted" boolean NOT NULL,
+	"trending_type" integer NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "hashtag_trend" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"hashtag_id" uuid,
-	"recorded_for_unix_time" integer,
-	"interest" integer
+	"hashtag_id" uuid NOT NULL,
+	"recorded_for_unix_time" integer NOT NULL,
+	"interest" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "hashtag_country_code_idx" ON "hashtag" ("country_code");--> statement-breakpoint

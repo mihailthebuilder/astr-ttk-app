@@ -16,7 +16,7 @@ export async function getAllHashtags(): Promise<Hashtag[]> {
   const rows = await db
     .select()
     .from(hashtag)
-    .innerJoin(hashtagTrend, eq(hashtag.id, hashtagTrend.id))
+    .innerJoin(hashtagTrend, eq(hashtag.id, hashtagTrend.hashtagId))
     .orderBy(hashtag.rank, hashtagTrend.recordedForUnixTime);
 
   const reduced = rows.reduce<Record<string, ProcessedHashtagRow>>(

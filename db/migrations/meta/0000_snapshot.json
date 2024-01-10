@@ -1,5 +1,5 @@
 {
-  "id": "465d6d57-f79c-46a6-b2e8-904a58421988",
+  "id": "2978a87e-4273-4fcd-971b-4514944debbe",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -19,55 +19,56 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "country_code": {
           "name": "country_code",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "posts": {
           "name": "posts",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "rank": {
           "name": "rank",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "latest_trending": {
           "name": "latest_trending",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "views": {
           "name": "views",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "is_promoted": {
           "name": "is_promoted",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "trending_type": {
           "name": "trending_type",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {
@@ -81,15 +82,7 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "hashtag_id_unique": {
-          "name": "hashtag_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "hashtag_trend": {
       "name": "hashtag_trend",
@@ -106,19 +99,19 @@
           "name": "hashtag_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "recorded_for_unix_time": {
           "name": "recorded_for_unix_time",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "interest": {
           "name": "interest",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {
