@@ -23,26 +23,3 @@ const { hashtags } = Astro.props;
     {hashtags.map((hashtag) => <BodyRow hashtag={hashtag} />)}
   </tbody>
 </table>
-
-<!-- 
-
-
-type BodyCellProps = {
-  children: string | JSX.Element | JSX.Element[];
-  className?: string;
-};
-
-function BodyCell(props: BodyCellProps) {
-  return (
-    <td
-      className={classNames(
-        "border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap py-2 text-left text-blueGray-700",
-        props.className
-      )}
-    >
-      {props.children}
-    </td>
-  );
-}
-
- -->

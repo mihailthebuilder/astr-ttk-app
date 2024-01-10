@@ -1,1 +1,19 @@
-<div></div>
+---
+import { classNames } from "../lib/helpers";
+
+interface Props {
+  children?: string | any[];
+  class?: string;
+}
+
+const props = Astro.props;
+---
+
+<td
+  class={classNames(
+    "border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap py-2 text-left text-blueGray-700",
+    props.class
+  )}
+>
+  {props.children}
+</td>
