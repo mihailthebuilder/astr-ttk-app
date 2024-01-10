@@ -9,7 +9,7 @@ ENV DB_URL=${DATABASE_URL}
 RUN npm install
 RUN npm run build
 
-RUN npm run migrate:deploy
+RUN npm run migrate:push
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
