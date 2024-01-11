@@ -4,7 +4,9 @@ import { compareHashtags } from "./helpers";
 
 test("hashtagSort", () => {
   const hashtags = [blizzard, rainyday];
-  hashtags.sort((a, b) => compareHashtags(a, b));
+  hashtags.sort((a, b) => compareHashtags(b, a));
+  expect(hashtags[0].name).toBe("rainyday");
+  expect(hashtags[1].name).toBe("blizzard");
 });
 
 const blizzard: Hashtag = {
