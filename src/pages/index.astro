@@ -1,10 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Table from "../components/Table.astro";
+import type { Hashtag } from "../lib/types";
 
 import { getAllHashtags } from "../db/client.ts";
 
 const hashtags = await getAllHashtags();
+
+function getLatestUpdateDate(hashtag: Hashtag[]): string {
+  const date = hashtag[0].createdAt;
+  return date.toLocaleString("default", { day: "numeric", month: "short" });
+}
 ---
 
 <Layout>
@@ -14,7 +20,7 @@ const hashtags = await getAllHashtags();
     >
       <h1 class="font-bold text-4xl">TikTok hashtags surging in popularity</h1>
       <p class="mt-5">
-        <!-- In the US; Last updated on {getLatestUpdateDate(hashtags)} -->
+        In the US; Last updated on {getLatestUpdateDate(hashtags)}
       </p>
       <p>
         Have questions or suggestions?{" "}
