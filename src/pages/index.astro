@@ -4,37 +4,13 @@ import Table from "../components/Table.astro";
 import type { Hashtag } from "../lib/types";
 
 import { getAllHashtags } from "../db/client.ts";
+import { isHighGrowthHashtag, compareHashtags } from "../lib/helpers";
 
 const hashtags = await getAllHashtags();
 
-function isHighGrowthHashtag(hashtag: Hashtag): boolean {
-  const interestMinus1 = getHashtagInterestAtPosition(hashtag, -1);
-  if (interestMinus1 < 100) {
-    return false;
-  }
-
-  const interestMinus2 = getHashtagInterestAtPosition(hashtag, -2);
-  const changeMinus1 = interestMinus1 - interestMinus2;
-  if (changeMinus1 < 20) {
-    return false;
-  }
-
-  const interestMinus3 = getHashtagInterestAtPosition(hashtag, -3);
-  const changeMinus2 = interestMinus2 - interestMinus3;
-  if (changeMinus2 > changeMinus1) {
-    return false;
-  }
-
-  return true;
-}
-
-function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
-  return hashtag.hashtagTrend.slice(input)[0].interest;
-}
-
-const hightGrowthHashtags = hashtags.filter((hashtag) =>
-  isHighGrowthHashtag(hashtag)
-);
+const hightGrowthHashtags = hashtags
+  .filter((hashtag) => isHighGrowthHashtag(hashtag))
+  .sort((a, b) => compareHashtags(b, a));
 
 function getLatestUpdateDate(hashtag: Hashtag[]): string {
   const date = hashtag[0].createdAt;
