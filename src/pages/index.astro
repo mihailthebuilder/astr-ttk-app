@@ -7,6 +7,35 @@ import { getAllHashtags } from "../db/client.ts";
 
 const hashtags = await getAllHashtags();
 
+function isHighGrowthHashtag(hashtag: Hashtag): boolean {
+  const interestMinus1 = getHashtagInterestAtPosition(hashtag, -1);
+  if (interestMinus1 < 100) {
+    return false;
+  }
+
+  const interestMinus2 = getHashtagInterestAtPosition(hashtag, -2);
+  const changeMinus1 = interestMinus1 - interestMinus2;
+  if (changeMinus1 < 20) {
+    return false;
+  }
+
+  const interestMinus3 = getHashtagInterestAtPosition(hashtag, -3);
+  const changeMinus2 = interestMinus2 - interestMinus3;
+  if (changeMinus2 > changeMinus1) {
+    return false;
+  }
+
+  return true;
+}
+
+function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
+  return hashtag.hashtagTrend.slice(input)[0].interest;
+}
+
+const hightGrowthHashtags = hashtags.filter((hashtag) =>
+  isHighGrowthHashtag(hashtag)
+);
+
 function getLatestUpdateDate(hashtag: Hashtag[]): string {
   const date = hashtag[0].createdAt;
   return date.toLocaleString("default", { day: "numeric", month: "short" });
@@ -32,7 +61,7 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
     <section
       class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10"
     >
-      <Table hashtags={hashtags} />
+      <Table hashtags={hightGrowthHashtags} />
     </section>
 
     <section
