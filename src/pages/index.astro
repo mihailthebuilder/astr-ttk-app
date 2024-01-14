@@ -2,11 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Table from "../components/Table.astro";
 import type { Hashtag } from "../lib/types";
+import { CountryCode } from "../lib/enums";
 
 import { getAllHashtags } from "../db/client.ts";
 import { isHighGrowthHashtag, compareHashtags } from "../lib/helpers";
 
-const hashtags = await getAllHashtags();
+const hashtags = await getAllHashtags(CountryCode.UnitedStates);
 
 const hightGrowthHashtags = hashtags
   .filter((hashtag) => isHighGrowthHashtag(hashtag))

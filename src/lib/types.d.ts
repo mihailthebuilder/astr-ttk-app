@@ -1,7 +1,6 @@
 export type Hashtag = {
   id: string;
   name: string;
-  countryCode: string;
   posts: number;
   rank: number;
   latestTrending: boolean;
@@ -12,7 +11,7 @@ export type Hashtag = {
   hashtagTrend: PointInHashtagTrend[];
 };
 
-export type PointInHashtagTrend = {
+type PointInHashtagTrend = {
   id: string;
   hashtagId: string;
   recordedForUnixTime: number;

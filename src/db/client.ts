@@ -1,8 +1,9 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import postgres from "postgres";
 import { hashtag, hashtagTrend } from "./schema";
 import type { Hashtag } from "../lib/types";
+import { CountryCode } from "../lib/enums";
 
 const queryClient = postgres(import.meta.env.DB_URL || "");
 export const db = drizzle(queryClient);
@@ -12,13 +13,21 @@ type HashtagTrendRow = typeof hashtagTrend.$inferSelect;
 
 type ProcessedHashtagRow = HashtagRow & { hashtagTrend: HashtagTrendRow[] };
 
-export async function getAllHashtags(): Promise<Hashtag[]> {
+export async function getAllHashtags(
+  countryCode: CountryCode
+): Promise<Hashtag[]> {
   const rows = await db
     .select()
     .from(hashtag)
-    .where(eq(hashtag.latestTrending, true))
+    .where(
+      and(
+        eq(hashtag.latestTrending, true),
+        eq(hashtag.countryCode, countryCode)
+      )
+    )
     .innerJoin(hashtagTrend, eq(hashtag.id, hashtagTrend.hashtagId))
     .orderBy(hashtag.rank, hashtagTrend.recordedForUnixTime);
+
   const reduced = rows.reduce<Record<string, ProcessedHashtagRow>>(
     (acc, row) => {
       const hashtagRow = row.hashtag;
