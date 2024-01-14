@@ -10,14 +10,15 @@ import {
   PathCountryCodeToTikTokCountryCode,
 } from "../../lib/helpers";
 
-const { country: pathCountryCode } = Astro.params;
+const { country } = Astro.params;
 
-if (pathCountryCode === undefined) {
+if (country === undefined) {
   return Astro.redirect("/countries/us");
 }
 
-const tikTokCountryCode =
-  PathCountryCodeToTikTokCountryCode[pathCountryCode.toLowerCase()];
+const pathCountryCode = country.toLowerCase();
+
+const tikTokCountryCode = PathCountryCodeToTikTokCountryCode[pathCountryCode];
 
 if (tikTokCountryCode === undefined) {
   return Astro.redirect("/countries/us");
@@ -33,6 +34,8 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
   const date = hashtag[0].createdAt;
   return date.toLocaleString("default", { day: "numeric", month: "short" });
 }
+
+const alternativeCountryCode = pathCountryCode == "uk" ? "us" : "uk";
 ---
 
 <Layout>
@@ -42,14 +45,15 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
     >
       <h1 class="font-bold text-4xl">TikTok hashtags surging in popularity</h1>
       <p class="mt-5">
-        In the {pathCountryCode.toUpperCase()}; Last updated on {
-          getLatestUpdateDate(hashtags)
-        }
+        In the {pathCountryCode.toUpperCase()} (<a
+          href={`/countries/${alternativeCountryCode}`}
+          class="text-blue-700 underline"
+          >see {alternativeCountryCode.toUpperCase()}</a
+        >); Last updated on {getLatestUpdateDate(hashtags)}
       </p>
       <p>
         Have questions or suggestions?{" "}
-        <a href="#contact" class="text-blue-700"> Click here</a>{" "}
-        to contact me.
+        <a href="#contact" class="text-blue-700 underline"> Contact me</a>{" "}
       </p>
     </section>
 
