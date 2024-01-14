@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Table from "../../components/Table.astro";
+import type { Hashtag } from "../../lib/types";
+
+import { getAllHashtags } from "../../db/client";
+import {
+  isHighGrowthHashtag,
+  compareHashtags,
+  PathCountryCodeToTikTokCountryCode,
+} from "../../lib/helpers";
+
+const { country: pathCountryCode } = Astro.params;
+
+if (pathCountryCode === undefined) {
+  return Astro.redirect("/countries/us");
+}
+
+const tikTokCountryCode =
+  PathCountryCodeToTikTokCountryCode[pathCountryCode.toLowerCase()];
+
+if (tikTokCountryCode === undefined) {
+  return Astro.redirect("/countries/us");
+}
+
+const hashtags = await getAllHashtags(tikTokCountryCode);
+
+const hightGrowthHashtags = hashtags
+  .filter((hashtag) => isHighGrowthHashtag(hashtag))
+  .sort((a, b) => compareHashtags(b, a));
+
+function getLatestUpdateDate(hashtag: Hashtag[]): string {
+  const date = hashtag[0].createdAt;
+  return date.toLocaleString("default", { day: "numeric", month: "short" });
+}
+---
+
+<Layout>
+  <main class="bg-slate-200">
+    <section
+      class="container px-5 py-10 md:mx-auto md:flex md:flex-col md:items-center md:pt-20"
+    >
+      <h1 class="font-bold text-4xl">TikTok hashtags surging in popularity</h1>
+      <p class="mt-5">
+        In the {pathCountryCode.toUpperCase()}; Last updated on {
+          getLatestUpdateDate(hashtags)
+        }
+      </p>
+      <p>
+        Have questions or suggestions?{" "}
+        <a href="#contact" class="text-blue-700"> Click here</a>{" "}
+        to contact me.
+      </p>
+    </section>
+
+    <section
+      class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10"
+    >
+      <Table hashtags={hightGrowthHashtags} />
+    </section>
+
+    <section
+      id="contact"
+      class="container mx-auto flex flex-row justify-center pb-10"
+    >
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScuwdxUrjGml1aL1Ppnf2pIiuvHz3vXVDU7FKwF0lieToojJw/viewform?embedded=true"
+        width="640"
+        height="700"
+      >
+        Loading…
+      </iframe>
+    </section>
+  </main>
+</Layout>
