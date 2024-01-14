@@ -11,7 +11,7 @@ interface Props {
 const { hashtag } = Astro.props;
 
 function hashtagLink(hashtag: Hashtag): string {
-  return `https://ads.tiktok.com/business/creativecenter/hashtag/${hashtag.name}/pc/en?countryCode=US&period=7`;
+  return `https://ads.tiktok.com/business/creativecenter/hashtag/${hashtag.name}/pc/en?countryCode=${hashtag.countryCode}&period=7`;
 }
 
 function postsViewsValue(hashtag: Hashtag): string {

@@ -3,7 +3,6 @@ import { eq, and } from "drizzle-orm";
 import postgres from "postgres";
 import { hashtag, hashtagTrend } from "./schema";
 import type { Hashtag } from "../lib/types";
-import { CountryCode } from "../lib/enums";
 
 const queryClient = postgres(import.meta.env.DB_URL || "");
 export const db = drizzle(queryClient);
@@ -13,9 +12,7 @@ type HashtagTrendRow = typeof hashtagTrend.$inferSelect;
 
 type ProcessedHashtagRow = HashtagRow & { hashtagTrend: HashtagTrendRow[] };
 
-export async function getAllHashtags(
-  countryCode: CountryCode
-): Promise<Hashtag[]> {
+export async function getAllHashtags(countryCode: string): Promise<Hashtag[]> {
   const rows = await db
     .select()
     .from(hashtag)

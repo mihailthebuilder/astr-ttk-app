@@ -70,3 +70,8 @@ export function compareHashtags(a: Hashtag, b: Hashtag): number {
 
   return 0;
 }
+
+export const WebsiteCodeToCountryCode: Record<string, string> = {
+  US: "US",
+  UK: "GB",
+};

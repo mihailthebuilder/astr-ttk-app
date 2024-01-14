@@ -9,6 +9,7 @@ export type Hashtag = {
   trendingType: number;
   createdAt: Date;
   hashtagTrend: PointInHashtagTrend[];
+  countryCode: string;
 };
 
 type PointInHashtagTrend = {
