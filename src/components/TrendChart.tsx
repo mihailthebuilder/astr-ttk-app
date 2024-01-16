@@ -65,6 +65,11 @@ export default function TrendChart(props: Props) {
         display: false,
       },
     },
+    elements: {
+      point: {
+        pointRadius: 0,
+      },
+    },
   };
 
   return (

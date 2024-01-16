@@ -12,34 +12,34 @@ export function classNames(
 }
 
 export function isHighGrowthHashtag(hashtag: Hashtag): boolean {
-  // final interest is highest
+  // final interest isn't too low
   const interestMinus1 = getHashtagInterestAtPosition(hashtag, -1);
-  if (interestMinus1 < 100) {
+  if (interestMinus1 < 95) {
     return false;
   }
 
-  // final growth delta is sufficiently high
-  const interestMinus2 = getHashtagInterestAtPosition(hashtag, -2);
-  const changeMinus1 = interestMinus1 - interestMinus2;
-  if (changeMinus1 < 20) {
-    return false;
-  }
-
-  // final growth delta is higher than previous growth delta
-  const interestMinus3 = getHashtagInterestAtPosition(hashtag, -3);
-  const changeMinus2 = interestMinus2 - interestMinus3;
-  if (changeMinus2 + 20 > changeMinus1) {
-    return false;
-  }
-
-  // all interest points besides final one aren't too high
-  for (let i = 0; i < hashtag.hashtagTrend.length - 1; i++) {
-    if (hashtag.hashtagTrend[i].interest > 80) {
+  // hasn't already peaked in the past
+  const lastHashtagIndex = hashtag.hashtagTrend.length - 1;
+  for (let i = 0; i < lastHashtagIndex; i++) {
+    if (
+      getHashtagInterestAtPosition(hashtag, i) >
+      getMaxInterest(i, lastHashtagIndex)
+    ) {
       return false;
     }
   }
 
   return true;
+}
+
+function getMaxInterest(index: number, lastHashtagIndex: number): number {
+  const distance = lastHashtagIndex - index;
+
+  if (distance > 5) {
+    return 70;
+  }
+
+  return 100;
 }
 
 function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
