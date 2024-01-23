@@ -1,0 +1,20 @@
+---
+import { CountryMap } from "../lib/helpers";
+
+interface Props {
+  selected: string;
+  toDisplay: string;
+}
+
+const { selected, toDisplay } = Astro.props;
+
+const label = CountryMap.get(toDisplay)?.label;
+---
+
+{
+  selected === toDisplay ? (
+    <span>{label}</span>
+  ) : (
+    <a href={`/countries/${toDisplay}`}>{label}</a>
+  )
+}

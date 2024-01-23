@@ -71,7 +71,13 @@ export function compareHashtags(a: Hashtag, b: Hashtag): number {
   return 0;
 }
 
-export const PathCountryCodeToTikTokCountryCode: Record<string, string> = {
-  us: "US",
-  uk: "GB",
+export const CountryMap = new Map<string, Country>([
+  ["us", { label: "the US", tiktokCode: "US" }],
+  ["uk", { label: "the UK", tiktokCode: "GB" }],
+  ["pk", { label: "Pakistan", tiktokCode: "PK" }],
+]);
+
+type Country = {
+  label: string;
+  tiktokCode: string;
 };

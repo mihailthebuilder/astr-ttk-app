@@ -1,13 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Table from "../../components/Table.astro";
+import CountryNav from "../../components/CountryNav.astro";
+
 import type { Hashtag } from "../../lib/types";
 
 import { getAllHashtags } from "../../db/client";
 import {
   isHighGrowthHashtag,
   compareHashtags,
-  PathCountryCodeToTikTokCountryCode,
+  CountryMap,
 } from "../../lib/helpers";
 
 const { country } = Astro.params;
@@ -18,13 +20,13 @@ if (country === undefined) {
 
 const pathCountryCode = country.toLowerCase();
 
-const tikTokCountryCode = PathCountryCodeToTikTokCountryCode[pathCountryCode];
+const mappedCountry = CountryMap.get(pathCountryCode);
 
-if (tikTokCountryCode === undefined) {
+if (mappedCountry === undefined) {
   return Astro.redirect("/countries/us");
 }
 
-const hashtags = await getAllHashtags(tikTokCountryCode);
+const hashtags = await getAllHashtags(mappedCountry.tiktokCode);
 
 const hightGrowthHashtags = hashtags
   .filter((hashtag) => isHighGrowthHashtag(hashtag))
@@ -34,8 +36,6 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
   const date = hashtag[0].createdAt;
   return date.toLocaleString("default", { day: "numeric", month: "short" });
 }
-
-const alternativeCountryCode = pathCountryCode == "uk" ? "us" : "uk";
 ---
 
 <Layout>
@@ -44,16 +44,14 @@ const alternativeCountryCode = pathCountryCode == "uk" ? "us" : "uk";
       class="container px-5 py-10 md:mx-auto md:flex md:flex-col md:items-center md:pt-20"
     >
       <h1 class="font-bold text-4xl">TikTok hashtags surging in popularity</h1>
-      <p class="mt-5">
-        In the {pathCountryCode.toUpperCase()} (<a
-          href={`/countries/${alternativeCountryCode}`}
-          class="text-blue-700 underline"
-          >see {alternativeCountryCode.toUpperCase()}</a
-        >); Last updated on {getLatestUpdateDate(hashtags)}
-      </p>
+      <div class="mt-5">
+        In <CountryNav country={pathCountryCode} />; Last updated on {
+          getLatestUpdateDate(hashtags)
+        }
+      </div>
       <p>
         Have questions or suggestions?{" "}
-        <a href="#contact" class="text-blue-700 underline"> Contact me</a>{" "}
+        <a href="#contact" class="text-blue-700 underline">Contact me</a>
       </p>
     </section>
 

@@ -1,0 +1,16 @@
+---
+import CountryLinkOrText from "./CountryLinkOrText.astro";
+
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
+---
+
+<div class="inline">
+  <CountryLinkOrText selected={country} toDisplay="us" /> / <CountryLinkOrText
+    selected={country}
+    toDisplay="uk"
+  /> / <CountryLinkOrText selected={country} toDisplay="pk" />
+</div>
