@@ -1,4 +1,5 @@
 ---
+import CountryNav from "../components/CountryNav.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -9,12 +10,9 @@ import Layout from "../layouts/Layout.astro";
         class="container px-5 py-10 md:mx-auto md:flex md:flex-col md:items-center md:pt-20 text-xl"
       >
         <p class="mb-3">404 - Page not found</p>
-        <p>
-          Go to the <a href="/countries/us" class="text-blue-600 underline"
-            >US page</a
-          > or the
-          <a href="countries/uk" class="text-blue-600 underline">UK one</a>
-        </p>
+        <div>
+          Go to the pages for<CountryNav country={"xx"} />
+        </div>
       </section>
     </main>
   </main>
