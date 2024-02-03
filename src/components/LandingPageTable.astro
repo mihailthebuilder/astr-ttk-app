@@ -1,0 +1,25 @@
+---
+import HeaderCell from "./HeaderCell.astro";
+import LandingPageBodyRow from "./LandingPageBodyRow.astro";
+
+import type { Hashtag } from "../lib/types";
+
+interface Props {
+  hashtags: Hashtag[];
+}
+
+const { hashtags } = Astro.props;
+---
+
+<table class="shadow-xl rounded table-fixed w-full md:w-auto">
+  <thead>
+    <tr>
+      <HeaderCell>Hashtag</HeaderCell>
+      <HeaderCell>Country</HeaderCell>
+      <HeaderCell>Posts / Views</HeaderCell>
+    </tr>
+  </thead>
+  <tbody class="bg-white">
+    {hashtags.map((hashtag) => <LandingPageBodyRow hashtag={hashtag} />)}
+  </tbody>
+</table>

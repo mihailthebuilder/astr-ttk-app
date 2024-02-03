@@ -5,7 +5,7 @@ import CountryNav from "../../components/CountryNav.astro";
 
 import type { Hashtag } from "../../lib/types";
 
-import { getAllHashtags } from "../../db/client";
+import { getHashtagsForCountry } from "../../db/client";
 import {
   isHighGrowthHashtag,
   compareHashtags,
@@ -26,7 +26,7 @@ if (mappedCountry === undefined) {
   return Astro.redirect("/countries/us");
 }
 
-const hashtags = await getAllHashtags(mappedCountry.tiktokCode);
+const hashtags = await getHashtagsForCountry(mappedCountry.tiktokCode);
 
 const hightGrowthHashtags = hashtags
   .filter((hashtag) => isHighGrowthHashtag(hashtag))

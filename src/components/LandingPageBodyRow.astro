@@ -1,0 +1,55 @@
+---
+import BodyCell from "./BodyCell.astro";
+import TrendChart from "./TrendChart.tsx";
+
+import type { Hashtag } from "../lib/types";
+
+interface Props {
+  hashtag: Hashtag;
+}
+
+const { hashtag } = Astro.props;
+
+function hashtagLink(hashtag: Hashtag): string {
+  return `https://ads.tiktok.com/business/creativecenter/hashtag/${hashtag.name}/pc/en?countryCode=${hashtag.countryCode}&period=30`;
+}
+
+function postsViewsValue(hashtag: Hashtag): string {
+  return formatNumber(hashtag.posts) + " / " + formatNumber(hashtag.views);
+}
+
+function formatNumber(input: number): string {
+  const billions = input / 1000000000;
+  if (billions >= 1) {
+    return Math.round(billions).toString() + "B";
+  }
+
+  const millions = input / 1000000;
+  if (millions >= 1) {
+    return Math.round(millions).toString() + "M";
+  }
+
+  const thousands = input / 1000;
+  if (thousands >= 1) {
+    return Math.round(thousands).toString() + "K";
+  }
+
+  return input.toString();
+}
+---
+
+<tr>
+  <BodyCell class="text-wrap">
+    <a
+      class="text-blue-700 text-lg font-medium"
+      href={hashtagLink(hashtag)}
+      target="_blank"
+    >
+      {hashtag.name}
+    </a>
+  </BodyCell>
+  <BodyCell>{hashtag.countryCode}</BodyCell>
+  <BodyCell>
+    {postsViewsValue(hashtag)}
+  </BodyCell>
+</tr>

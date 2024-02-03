@@ -1,6 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CountryNav from "../components/CountryNav.astro";
+import LandingPageTable from "../components/LandingPageTable.astro";
+import { getAllHashtags } from "../db/client";
+
+const hashtags = await getAllHashtags();
 ---
 
 <Layout>
@@ -10,11 +14,11 @@ import CountryNav from "../components/CountryNav.astro";
         class="container px-5 py-10 md:mx-auto md:flex md:flex-col md:items-center md:pt-20 text-xl"
       >
         <h1 class="font-bold text-4xl">TikTok Hashtags Going Viral Today</h1>
-        <div class="mt-12">
-          Filter for <CountryNav country={"xx"} />. You'll get charts showing
-          why those hashtags are trending today.
+        <div class="my-12 max-w-[30rem] text-center">
+          Get the full list for <CountryNav country={"xx"} />
         </div>
-        <!-- show a list of all hashtags, with views, posts, and corresponding countries -->
+
+        <LandingPageTable hashtags={hashtags} />
       </section>
     </main>
   </main>
