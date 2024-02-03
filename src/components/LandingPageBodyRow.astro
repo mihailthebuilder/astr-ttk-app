@@ -41,15 +41,22 @@ function formatNumber(input: number): string {
 <tr>
   <BodyCell class="text-wrap">
     <a
-      class="text-blue-700 text-lg font-medium"
+      class="text-blue-700 text-lg font-medium break-all"
       href={hashtagLink(hashtag)}
       target="_blank"
     >
       {hashtag.name}
     </a>
+    <div class="block md:hidden">
+      <p>
+        {hashtag.countryCode} / {formatNumber(hashtag.posts)} posts / {
+          formatNumber(hashtag.views)
+        } views
+      </p>
+    </div>
   </BodyCell>
-  <BodyCell>{hashtag.countryCode}</BodyCell>
-  <BodyCell>
+  <BodyCell class="hidden md:table-cell">{hashtag.countryCode}</BodyCell>
+  <BodyCell class="hidden md:table-cell">
     {postsViewsValue(hashtag)}
   </BodyCell>
 </tr>

@@ -33,7 +33,7 @@ export async function getAllHashtags(): Promise<Hashtag[]> {
     .where(and(eq(hashtag.latestTrending, true)));
 
   shuffleArray(rows);
-  const rowsToProcess = rows.slice(0, 10);
+  const rowsToProcess = rows.slice(0, 20);
 
   processRows(rowsToProcess);
 
