@@ -19,7 +19,7 @@ export function isHighGrowthHashtag(hashtag: Hashtag): boolean {
   }
 
   // hasn't already peaked in the past
-  const lastHashtagIndex = hashtag.hashtagTrend.length - 1;
+  const lastHashtagIndex = hashtag.trend.length - 1;
   for (let i = 0; i < lastHashtagIndex; i++) {
     if (
       getHashtagInterestAtPosition(hashtag, i) >
@@ -43,7 +43,7 @@ function getMaxInterest(index: number, lastHashtagIndex: number): number {
 }
 
 function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
-  return hashtag.hashtagTrend.slice(input)[0].interest;
+  return hashtag.trend.slice(input)[0].value;
 }
 
 export function compareHashtags(a: Hashtag, b: Hashtag): number {

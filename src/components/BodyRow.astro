@@ -56,6 +56,6 @@ function formatNumber(input: number): string {
     {postsViewsValue(hashtag)}
   </BodyCell>
   <BodyCell class="w-[150px] h-[70px]">
-    <TrendChart trend={hashtag.hashtagTrend} name={hashtag.name} client:load />
+    <TrendChart trend={hashtag.trend} name={hashtag.name} client:load />
   </BodyCell>
 </tr>

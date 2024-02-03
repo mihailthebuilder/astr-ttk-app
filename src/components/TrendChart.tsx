@@ -34,10 +34,10 @@ export default function TrendChart(props: Props) {
   }, []);
 
   const labels = props.trend.map((trendPoint) =>
-    unixToFormattedDate(trendPoint.recordedForUnixTime)
+    unixToFormattedDate(trendPoint.time)
   );
 
-  const values = props.trend.map((trendPoint) => trendPoint.interest);
+  const values = props.trend.map((trendPoint) => trendPoint.value);
 
   const data = {
     labels,

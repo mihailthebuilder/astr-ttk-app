@@ -1,5 +1,5 @@
 {
-  "id": "2978a87e-4273-4fcd-971b-4514944debbe",
+  "id": "b8132651-20fa-4d74-b087-541532b35e3b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -69,6 +69,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "trend": {
+          "name": "trend",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {
@@ -81,64 +87,6 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "hashtag_trend": {
-      "name": "hashtag_trend",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "hashtag_id": {
-          "name": "hashtag_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "recorded_for_unix_time": {
-          "name": "recorded_for_unix_time",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "interest": {
-          "name": "interest",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "hashtag_trend_hashtag_id_idx": {
-          "name": "hashtag_trend_hashtag_id_idx",
-          "columns": [
-            "hashtag_id"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "hashtag_trend_hashtag_id_hashtag_id_fk": {
-          "name": "hashtag_trend_hashtag_id_hashtag_id_fk",
-          "tableFrom": "hashtag_trend",
-          "tableTo": "hashtag",
-          "schemaTo": "public",
-          "columnsFrom": [
-            "hashtag_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }

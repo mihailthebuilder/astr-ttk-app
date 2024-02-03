@@ -8,13 +8,11 @@ export type Hashtag = {
   isPromoted: boolean;
   trendingType: number;
   createdAt: Date;
-  hashtagTrend: PointInHashtagTrend[];
+  trend: PointInHashtagTrend[];
   countryCode: string;
 };
 
 type PointInHashtagTrend = {
-  id: string;
-  hashtagId: string;
-  recordedForUnixTime: number;
-  interest: number;
+  time: number;
+  value: number;
 };
