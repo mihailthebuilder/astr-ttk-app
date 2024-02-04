@@ -16,3 +16,5 @@ type PointInHashtagTrend = {
   time: number;
   value: number;
 };
+
+type Faq = { question: string; answer: string };

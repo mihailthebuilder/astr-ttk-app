@@ -2,15 +2,52 @@
 import Layout from "../layouts/Layout.astro";
 import CountryNav from "../components/CountryNav.astro";
 import LandingPageTable from "../components/LandingPageTable.astro";
+import Faq from "../components/Faq.astro";
 import { getAllHashtags } from "../db/client";
 
 const hashtags = await getAllHashtags();
+
+const faqs = [
+  {
+    question: "Why should I use hashtags that are trending today?",
+    answer: `TikTok's algorithm operates by delivering content to 
+    users in accordance with their preferences. The use of hashtags 
+    plays a significant role in the platform's recommendation engine, 
+    aiding in the categorization of content based on users' past 
+    preferences. When you incorporate a specific hashtag in your 
+    TikTok video, you are effectively informing TikTok that your 
+    content falls within that particular category. If this category 
+    aligns with the interests of a broad audience, TikTok is more 
+    likely to suggest your video to a larger audience, resulting 
+    in increased views for your content.`,
+  },
+  {
+    question: "Should I always have trending hashtags in my videos?",
+    answer: `While it may seem beneficial to always use trending 
+    hashtags, it's not a strict rule. When you use a specific 
+    hashtag, your video gets shown to users who have engaged with 
+    content under that hashtag before. However, if the hashtag 
+    isn't genuinely related to your video, the viewers it attracts 
+    may not be your target audience. Without receiving enough 
+    engagement from your ideal audience, your video won't gain 
+    visibility among a broader audience. Therefore, it's crucial 
+    to use hashtags that truly align with the content of your 
+    video to ensure it reaches the right viewers.`,
+  },
+  {
+    question: "How many hashtags should I add to my video?",
+    answer: `Select a range of 3 to 6 hashtags for your video. 
+    Adding more than that may lead to confusion for the TikTok algorithm. 
+    Aim for a combination of both niche and popular hashtags to 
+    optimize your video's discoverability.`,
+  },
+];
 ---
 
 <Layout>
   <main class="bg-slate-200 py-10">
     <section
-      class="container px-5 md:mx-auto md:flex md:flex-col md:items-center md:pt-20 text-xl"
+      class="container px-5 md:mx-auto md:flex md:flex-col md:items-center md:pt-10 text-xl"
     >
       <h1 class="font-bold text-4xl">TikTok Hashtags Going Viral Today</h1>
       <div class="my-6 md:my-12 max-w-[30rem] md:text-center">
@@ -23,7 +60,7 @@ const hashtags = await getAllHashtags();
       <LandingPageTable hashtags={hashtags} />
     </section>
     <section
-      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center"
+      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center pb-10 md:pb-20"
     >
       <div class="max-w-[40rem]">
         <h2 class="font-bold text-3xl text-center pb-5 md:pb-10">About</h2>
@@ -54,7 +91,14 @@ const hashtags = await getAllHashtags();
         </div>
       </div>
     </section>
-    <section id="faq"></section>
+    <section
+      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center"
+    >
+      <div class="max-w-[40rem]">
+        <h2 class="font-bold text-3xl text-center pb-5 md:pb-10">FAQs</h2>
+        {faqs.map((faq) => <Faq faq={faq} />)}
+      </div>
+    </section>
     <section id="contact"></section>
   </main>
 </Layout>
