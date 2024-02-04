@@ -18,39 +18,43 @@ const hashtags = await getAllHashtags();
       </div>
     </section>
     <section
-      class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10"
+      class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10 md:pb-20"
     >
       <LandingPageTable hashtags={hashtags} />
     </section>
-    <section class="container">
-      <h2>About</h2>
-      <div>
-        <p>
-          This website shows hashtags trending today on TikTok, ordered by how
-          likely it is for them to go viral. We currently cover the United
-          States, the United Kingdom, and Pakistan.
-        </p>
-        <p>
-          Go to the country's page to get the full list. There, you'll also get
-          charts showing the hashtag's popularity over the last month.
-        </p>
-        <p>These hashtags can be used for various purposes, such as:</p>
-        <ul>
-          <li>
-            Discovering topics to talk about in your videos that will guarantee
-            views.
-          </li>
-          <li>
-            Finding the best hashtags to add to your videos so that they go
-            viral.
-          </li>
-          <li>Performing social trend analysis.</li>
-        </ul>
+    <section
+      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center"
+    >
+      <div class="max-w-[40rem]">
+        <h2 class="font-bold text-3xl text-center pb-5 md:pb-10">About</h2>
+        <div>
+          <p class="pb-3">
+            This website shows hashtags trending today on TikTok, ordered by how
+            likely it is for them to go viral. We currently cover the United
+            States, the United Kingdom, and Pakistan.
+          </p>
+          <p class="pb-3">
+            Go to the country's page to get the full list. There, you'll also
+            get charts showing the hashtag's popularity over the last month.
+          </p>
+          <p class="pb-3">
+            These hashtags can be used for various purposes, such as:
+          </p>
+          <ul class="list-disc pl-5">
+            <li>
+              Discovering topics to talk about in your videos that will
+              guarantee views.
+            </li>
+            <li>
+              Finding the best hashtags to add to your videos so that they go
+              viral.
+            </li>
+            <li>Performing social trend analysis.</li>
+          </ul>
+        </div>
       </div>
     </section>
-    <section>
-      <h2>FAQ</h2>
-    </section>
-    <section>Contact us</section>
+    <section id="faq"></section>
+    <section id="contact"></section>
   </main>
 </Layout>
