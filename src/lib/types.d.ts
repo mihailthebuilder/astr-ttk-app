@@ -18,3 +18,5 @@ type PointInHashtagTrend = {
 };
 
 type Faq = { question: string; answer: string };
+
+type ContactRequest = { email: string; message: string };

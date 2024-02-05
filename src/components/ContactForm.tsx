@@ -1,15 +1,28 @@
 import { useState } from "react";
+import type { ContactRequest } from "../lib/types";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const email = (event.currentTarget.email as HTMLInputElement).value;
     const message = (event.currentTarget.message as HTMLTextAreaElement).value;
 
-    // send request
+    const request: ContactRequest = { email, message };
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      console.log("Request failed");
+    }
 
     setSubmitted(true);
   }
