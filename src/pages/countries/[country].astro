@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Table from "../../components/Table.astro";
 import CountryNav from "../../components/CountryNav.astro";
+import ContactForm from "../../components/ContactForm";
 
 import type { Hashtag } from "../../lib/types";
 
@@ -39,9 +40,9 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
 ---
 
 <Layout>
-  <main class="bg-slate-200">
+  <main class="bg-slate-200 py-10">
     <section
-      class="container px-5 py-10 md:mx-auto md:flex md:flex-col md:items-center md:pt-20"
+      class="container px-5 pb-10 md:pt-10 md:mx-auto md:flex md:flex-col md:items-center"
     >
       <h1 class="font-bold text-4xl">TikTok hashtags surging in popularity</h1>
       <div class="mt-5">
@@ -51,7 +52,7 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
       </div>
       <p>
         Have questions or suggestions?{" "}
-        <a href="#contact" class="text-blue-700 underline">Contact me</a>
+        <a href="#contact" class="text-blue-700 underline">Contact us</a>
       </p>
     </section>
 
@@ -62,16 +63,15 @@ function getLatestUpdateDate(hashtag: Hashtag[]): string {
     </section>
 
     <section
+      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center mt-5"
       id="contact"
-      class="container mx-auto flex flex-row justify-center pb-10"
     >
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLScuwdxUrjGml1aL1Ppnf2pIiuvHz3vXVDU7FKwF0lieToojJw/viewform?embedded=true"
-        width="640"
-        height="700"
-      >
-        Loading…
-      </iframe>
+      <div class="max-w-[40rem]">
+        <h2 class="font-bold text-3xl md:text-center pb-5 md:pb-10">
+          Questions/feedback? Send them over!
+        </h2>
+        <ContactForm client:load />
+      </div>
     </section>
   </main>
 </Layout>
