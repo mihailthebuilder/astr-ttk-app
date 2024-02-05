@@ -9,8 +9,8 @@ export const POST: APIRoute = async ({ request }) => {
   const body = (await request.json()) as ContactRequest;
   const text = `Email: ${body.email} . Message: ${body.message}`;
 
-  const to = import.meta.env.EMAIL_FROM;
-  const from = import.meta.env.EMAIL_TO;
+  const to = import.meta.env.EMAIL_TO;
+  const from = import.meta.env.EMAIL_FROM;
   const subject = "New ttk contact submission";
 
   try {
