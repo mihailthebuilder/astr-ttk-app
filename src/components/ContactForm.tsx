@@ -1,6 +1,25 @@
+import { useState } from "react";
+
 export default function ContactForm() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const email = (event.currentTarget.email as HTMLInputElement).value;
+    const message = (event.currentTarget.message as HTMLTextAreaElement).value;
+
+    // send request
+
+    setSubmitted(true);
+  }
+
+  if (submitted) {
+    return <div>Thanks for reaching out. We'll get back to you ASAP!</div>;
+  }
+
   return (
-    <form className="flex flex-col md:items-center">
+    <form className="flex flex-col md:items-center" onSubmit={submit}>
       <div className="mb-4 w-full">
         <input
           type="email"
@@ -25,7 +44,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 min-w-[10rem]"
       >
         Submit
       </button>
