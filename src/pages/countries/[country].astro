@@ -7,11 +7,7 @@ import ContactForm from "../../components/ContactForm";
 import type { Hashtag } from "../../lib/types";
 
 import { getHashtagsForCountry } from "../../db/client";
-import {
-  isHighGrowthHashtag,
-  compareHashtags,
-  CountryMap,
-} from "../../lib/helpers";
+import { compareHashtags, CountryMap } from "../../lib/helpers";
 
 const { country } = Astro.params;
 
