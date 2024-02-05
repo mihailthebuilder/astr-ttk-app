@@ -3,6 +3,7 @@ import type { ContactRequest } from "../lib/types";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,14 +22,20 @@ export default function ContactForm() {
     });
 
     if (!response.ok) {
-      console.log("Request failed");
+      setErrorMessage("Something went wrong. Please try again later.");
+      return;
     }
 
+    setErrorMessage("");
     setSubmitted(true);
   }
 
   if (submitted) {
-    return <div>Thanks for reaching out. We'll get back to you ASAP!</div>;
+    return (
+      <div className="w-full p-2 bg-green-700 text-white rounded-md md:text-center">
+        Thanks for reaching out. We'll get back to you ASAP!
+      </div>
+    );
   }
 
   return (
@@ -61,6 +68,12 @@ export default function ContactForm() {
       >
         Submit
       </button>
+
+      {errorMessage && (
+        <div className="mt-10 w-full p-2 bg-red-500 text-white rounded-md md:text-center">
+          {errorMessage}
+        </div>
+      )}
     </form>
   );
 }
