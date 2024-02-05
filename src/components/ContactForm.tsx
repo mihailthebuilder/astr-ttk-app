@@ -40,6 +40,15 @@ export default function ContactForm() {
 
   return (
     <form className="flex flex-col md:items-center" onSubmit={submit}>
+      {errorMessage && (
+        <div
+          id="errorMessage"
+          className="mb-10 w-full p-2 bg-red-500 text-white rounded-md md:text-center"
+        >
+          {errorMessage}
+        </div>
+      )}
+
       <div className="mb-4 w-full">
         <input
           type="email"
@@ -68,12 +77,6 @@ export default function ContactForm() {
       >
         Submit
       </button>
-
-      {errorMessage && (
-        <div className="mt-10 w-full p-2 bg-red-500 text-white rounded-md md:text-center">
-          {errorMessage}
-        </div>
-      )}
     </form>
   );
 }
