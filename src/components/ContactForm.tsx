@@ -1,6 +1,6 @@
 export default function ContactForm() {
   return (
-    <form className="flex flex-col items-center">
+    <form className="flex flex-col md:items-center">
       <div className="mb-4 w-full">
         <input
           type="email"
