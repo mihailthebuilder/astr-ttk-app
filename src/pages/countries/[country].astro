@@ -29,9 +29,7 @@ if (mappedCountry === undefined) {
 
 const hashtags = await getHashtagsForCountry(mappedCountry.tiktokCode);
 
-const hightGrowthHashtags = hashtags
-  .filter((hashtag) => isHighGrowthHashtag(hashtag))
-  .sort((a, b) => compareHashtags(b, a));
+const hightGrowthHashtags = hashtags.sort((a, b) => compareHashtags(b, a));
 
 function getLatestUpdateDate(hashtag: Hashtag[]): string {
   const date = hashtag[0].createdAt;

@@ -47,6 +47,17 @@ function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
 }
 
 export function compareHashtags(a: Hashtag, b: Hashtag): number {
+  const aHighGrowth = isHighGrowthHashtag(a);
+  const bHighGrowth = isHighGrowthHashtag(b);
+
+  if (aHighGrowth && !bHighGrowth) {
+    return 1;
+  }
+
+  if (!aHighGrowth && bHighGrowth) {
+    return -1;
+  }
+
   const aDelta =
     getHashtagInterestAtPosition(a, -1) - getHashtagInterestAtPosition(a, -2);
 
