@@ -7,6 +7,7 @@ import {
   boolean,
   index,
   jsonb,
+  PgBigInt64Builder,
 } from "drizzle-orm/pg-core";
 import type { PointInHashtagTrend } from "../lib/types";
 
@@ -19,7 +20,7 @@ export const hashtag = pgTable(
     posts: integer("posts").notNull(),
     rank: integer("rank").notNull(),
     latestTrending: boolean("latest_trending").notNull(),
-    views: integer("views").notNull(),
+    views: new PgBigInt64Builder("views").notNull(),
     isPromoted: boolean("is_promoted").notNull(),
     trendingType: integer("trending_type").notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),

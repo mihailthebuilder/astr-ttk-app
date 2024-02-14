@@ -46,6 +46,44 @@ function getHashtagInterestAtPosition(hashtag: Hashtag, input: number): number {
   return hashtag.trend.slice(input)[0].value;
 }
 
+export function formatNumber(input: number | bigint): string {
+  if (typeof input == "number") {
+    const billions = input / 1000000000;
+    if (billions >= 1) {
+      return Math.round(billions).toString() + "B";
+    }
+
+    const millions = input / 1000000;
+    if (millions >= 1) {
+      return Math.round(millions).toString() + "M";
+    }
+
+    const thousands = input / 1000;
+    if (thousands >= 1) {
+      return Math.round(thousands).toString() + "K";
+    }
+
+    return input.toString();
+  }
+
+  const billions = BigInt(input) / BigInt(1000000000);
+  if (billions >= 1) {
+    return Math.round(Number(billions)).toString() + "B";
+  }
+
+  const millions = BigInt(input) / BigInt(1000000);
+  if (millions >= 1) {
+    return Math.round(Number(millions)).toString() + "M";
+  }
+
+  const thousands = BigInt(input) / BigInt(1000);
+  if (thousands >= 1) {
+    return Math.round(Number(thousands)).toString() + "K";
+  }
+
+  return input.toString();
+}
+
 export function compareHashtags(a: Hashtag, b: Hashtag): number {
   const aHighGrowth = isHighGrowthHashtag(a);
   const bHighGrowth = isHighGrowthHashtag(b);
@@ -69,9 +107,13 @@ export function compareHashtags(a: Hashtag, b: Hashtag): number {
     return deltaDiff;
   }
 
-  const viewsDiff = a.views - b.views;
-  if (viewsDiff != 0) {
-    return viewsDiff;
+  // can't do views difference because we're using bigint for views
+  if (a.views > b.views) {
+    return 1;
+  }
+
+  if (a.views < b.views) {
+    return -1;
   }
 
   const postsDiff = a.posts - b.posts;

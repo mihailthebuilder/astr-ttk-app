@@ -1,0 +1,1 @@
+ALTER TABLE "hashtag" ALTER COLUMN "views" SET DATA TYPE bigint;

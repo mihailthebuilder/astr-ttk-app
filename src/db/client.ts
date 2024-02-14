@@ -2,7 +2,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { eq, and } from "drizzle-orm";
 import postgres from "postgres";
 import { hashtag } from "./schema";
-import type { Hashtag } from "../lib/types";
+import type { Hashtag, PointInHashtagTrend } from "../lib/types";
 
 const queryClient = postgres(import.meta.env.DB_URL || "");
 export const db = drizzle(queryClient);
@@ -21,9 +21,9 @@ export async function getHashtagsForCountry(
     )
     .orderBy(hashtag.rank);
 
-  processRows(rows);
+  const hashtags = processRows(rows);
 
-  return rows;
+  return hashtags;
 }
 
 export async function getAllHashtags(): Promise<Hashtag[]> {
@@ -33,19 +33,30 @@ export async function getAllHashtags(): Promise<Hashtag[]> {
     .where(and(eq(hashtag.latestTrending, true)));
 
   shuffleArray(rows);
-  const rowsToProcess = rows.slice(0, 20);
 
-  processRows(rowsToProcess);
+  const hashtags = processRows(rows.slice(0, 20));
 
-  return rowsToProcess;
+  return hashtags;
 }
 
-function processRows(rows: Hashtag[]) {
-  rows.forEach((row) => {
-    row.trend = row.trend.map((point) => ({
-      time: point.time,
-      value: point.value * 100,
-    }));
+function processRows(rows: HashtagTableRow[]): Hashtag[] {
+  return rows.map((row) => {
+    return {
+      id: row.id,
+      name: row.name,
+      countryCode: row.countryCode,
+      posts: row.posts,
+      rank: row.rank,
+      latestTrending: row.latestTrending,
+      isPromoted: row.isPromoted,
+      trendingType: row.trendingType,
+      createdAt: row.createdAt,
+      views: BigInt(row.views as bigint),
+      trend: row.trend.map((point) => ({
+        time: point.time,
+        value: point.value * 100,
+      })),
+    };
   });
 }
 
@@ -55,3 +66,17 @@ function shuffleArray(array: any[]) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+type HashtagTableRow = {
+  id: string;
+  name: string;
+  countryCode: string;
+  posts: number;
+  rank: number;
+  latestTrending: boolean;
+  views: unknown;
+  isPromoted: boolean;
+  trendingType: number;
+  createdAt: Date;
+  trend: PointInHashtagTrend[];
+};

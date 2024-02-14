@@ -4,7 +4,7 @@ export type Hashtag = {
   posts: number;
   rank: number;
   latestTrending: boolean;
-  views: number;
+  views: bigint;
   isPromoted: boolean;
   trendingType: number;
   createdAt: Date;

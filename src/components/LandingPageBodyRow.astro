@@ -2,6 +2,7 @@
 import BodyCell from "./BodyCell.astro";
 
 import type { Hashtag } from "../lib/types";
+import { formatNumber } from "../lib/helpers";
 
 interface Props {
   hashtag: Hashtag;
@@ -15,25 +16,6 @@ function hashtagLink(hashtag: Hashtag): string {
 
 function postsViewsValue(hashtag: Hashtag): string {
   return formatNumber(hashtag.posts) + " / " + formatNumber(hashtag.views);
-}
-
-function formatNumber(input: number): string {
-  const billions = input / 1000000000;
-  if (billions >= 1) {
-    return Math.round(billions).toString() + "B";
-  }
-
-  const millions = input / 1000000;
-  if (millions >= 1) {
-    return Math.round(millions).toString() + "M";
-  }
-
-  const thousands = input / 1000;
-  if (thousands >= 1) {
-    return Math.round(thousands).toString() + "K";
-  }
-
-  return input.toString();
 }
 ---
 
