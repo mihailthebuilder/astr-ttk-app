@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import CountryNav from "../components/CountryNav.astro";
 import LandingPageTable from "../components/LandingPageTable.astro";
 import Faq from "../components/Faq.astro";
-import ContactForm from "../components/ContactForm";
 import { getAllHashtags } from "../db/client";
 
 const hashtags = await getAllHashtags();
@@ -98,16 +97,6 @@ const faqs = [
       <div class="max-w-[40rem]">
         <h2 class="font-bold text-3xl md:text-center pb-5 md:pb-10">FAQs</h2>
         {faqs.map((faq) => <Faq faq={faq} />)}
-      </div>
-    </section>
-    <section
-      class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center mt-5"
-    >
-      <div class="max-w-[40rem]">
-        <h2 class="font-bold text-3xl md:text-center pb-5 md:pb-10">
-          Questions/feedback? Send them over!
-        </h2>
-        <ContactForm client:load />
       </div>
     </section>
   </main>
