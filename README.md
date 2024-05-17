@@ -1,5 +1,7 @@
 # TikTok Data App
 
+**I've removed the database -> made the site static and disabled automatic deployments in Cloudflare.**
+
 Website that shows hashtags that are trending on TikTok today. Built with [Astro](https://astro.build/).
 
 ## Dependencies
