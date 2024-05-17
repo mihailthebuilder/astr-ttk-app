@@ -9,6 +9,14 @@ import type { Hashtag } from "../../lib/types";
 import { getHashtagsForCountry } from "../../db/client";
 import { compareHashtags, CountryMap } from "../../lib/helpers";
 
+export function getStaticPaths() {
+  return [
+    { params: { country: "us" } },
+    { params: { country: "uk" } },
+    { params: { country: "pk" } },
+  ];
+}
+
 const { country } = Astro.params;
 
 if (country === undefined) {
